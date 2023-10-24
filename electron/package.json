@@ -1,0 +1,18 @@
+{
+  "name": "dnd_companion",
+  "version": "1.0.0",
+  "description": "A DnD companion app, to manage character, events and calculations",
+  "main": "scripts/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "author": "DavidLegarre",
+  "license": "ISC",
+  "devDependencies": {
+    "electron-prebuilt-compile": "27.0.2"
+  },
+  "dependencies": {}
+}
