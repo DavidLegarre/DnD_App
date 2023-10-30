@@ -1,0 +1,83 @@
+{
+    "lvl_0": {
+    "name": "Barbarian",
+    "hit_die": "1d12",
+    "HP_lvl1": "12 + CON",
+    "Proficiencies": {
+        "Armor": ["light armor", "medium armor", "shield"],
+        "Weapons": ["simple weapons", "martial weapons"],
+        "Tools": [],
+        "Skills": [
+            "Animal Handling", "Athletics", "Intimidation",
+            "Nature", "Perception", "Survival"
+        ]
+    },
+    "Saving_throws": ["STR", "CON"],
+    "Starting_equipment": [
+        "greataxe or martial melee weapons",
+        "2 handaxes or any simple weapon",
+        "Explorer's pack",
+        "4 javelin"
+    ] 
+    },
+    "lvl_1": {
+        "Features": ["rage", "Unarmored defense"]
+    },
+    "lvl_2": {
+        "Features": ["Danger sense", "Reckless attack"]
+    },
+    "lvl_3": {
+        "Features": ["Primal path", "Primal Knowledge"]
+    },
+    "lvl_4": {
+        "Features": ["ASI"]
+    },
+    "lvl_5": {
+        "Features": ["Extra attack", "Fast movement"]
+    },
+    "lvl_6": {
+        "Features": ["Subclass"]
+    },
+    "lvl_7": {
+        "Features": ["Feral instinct", "Instinctive Pounce"]
+    },
+    "lvl_8": {
+        "Features": ["ASI"]
+    },
+    "lvl_9": {
+        "Features": ["Brutal critical"]
+    },
+    "lvl_10": {
+        "Features": ["Subclass"]
+    },
+    "lvl_11": {
+        "Features": ["Relentless rage"]
+    },
+    "lvl_12": {
+        "Features": ["ASI"]
+    },
+    "lvl_13": {
+        "Features": ["Brutal critical"]
+    },
+    "lvl_14": {
+        "Features": ["Subclass"]
+    },
+    "lvl_15": {
+        "Features": ["Persistent rage"]
+    },
+    "lvl_16": {
+        "Features": ["ASI"]
+    },
+    "lvl_17": {
+        "Features": ["Brutal critical"]
+    },
+    "lvl_18": {
+        "Features": ["Indomitable might"]
+    },
+    "lvl_19": {
+        "Features": ["ASI"]
+    },
+    "lvl_20": {
+        "Features": ["Primal Champion"]
+    }
+}
