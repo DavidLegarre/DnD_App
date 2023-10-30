@@ -1,4 +1,4 @@
-from utils import get_class_features
+from backend.classes.utils.utils import get_class_features
 
 
 class PcCharacter():
