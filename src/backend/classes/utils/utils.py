@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 def get_class_features(Class: str, level: int):
-    features_path = Path.cwd() / 'data' / 'classes'
+    features_path = Path.cwd() / 'src' / 'backend' / 'data' / 'classes'
     features_path = features_path / 'Barbarian' / 'Barbarian.json'
     features = json.load(open(features_path, 'r'))
     features = features["lvl_0"]
@@ -15,6 +15,5 @@ def get_class_features(Class: str, level: int):
     for feature in features_to_extract:
         if feature in features:
             features_out[feature] = features[feature]
-            
+
     return features_out
-    

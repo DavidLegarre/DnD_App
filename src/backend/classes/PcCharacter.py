@@ -1,4 +1,4 @@
-from backend.classes.utils.utils import get_class_features
+from utils.utils import get_class_features
 
 
 class PcCharacter():
@@ -6,14 +6,14 @@ class PcCharacter():
     """
 
     def __init__(self, name,
-                 Class, level,
+                 _class, level,
                  race, background,
                  alignment, XP=0,
-                 stats: list = None) -> None:
+                 stats: dict = None) -> None:
 
         self.name = name
         self._stats = stats
-        level_0_features = get_class_features(Class, 0)
+        level_0_features = get_class_features(_class, 0)
         hit_die = level_0_features["hit_die"]
         print(level_0_features)
         self.level = level
@@ -28,7 +28,15 @@ class PcCharacter():
 
 
 if __name__ == '__main__':
+    stats = {
+        "STR": 20,
+        "DEX": 20,
+        "CON": 20,
+        "INT": 20,
+        "WIS": 20,
+        "CHA": 20
+    }
     My_Pc = PcCharacter(
         name="Lalkish Test", Class="Barbarian",
-        level=1, race="", background="", alignment=""
+        level=1, race="", background="", alignment="", stats=stats
     )
