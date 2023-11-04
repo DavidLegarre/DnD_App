@@ -1,5 +1,6 @@
 import random
 import re
+import numpy as np
 
 
 class die_calculator():
@@ -48,6 +49,22 @@ class die_calculator():
     def roll_disadv(self, faces):
         return min(self.roll_die(faces), self.roll_die(faces))
 
+    def get_avg(self, expression: str = None):
+        """Get the average of a roll expression"""
+        avgs = 0
+        expression = expression.strip()
+        matches = re.findall(r'(\d+)d(\d+)', expression)
+        for match in matches:
+            num_rolls, die_roll = [int(n) for n in match]
+            avg = np.sum(range(die_roll+1))/die_roll
+            avgs += avg*num_rolls
+
+        return avgs
+
+    def get_faces(self, expression):
+        matches = re.findall(r'(\d+)d(\d+)', expression)[0]
+        return int(matches[1])
+
 
 if __name__ == '__main__':
     die = die_calculator()
@@ -57,6 +74,6 @@ if __name__ == '__main__':
         "d20 - 6 DC 15"
     ]
 
-    for expression in expressions:
-        result = die.calculate_expression(expression)
-        print(f"{result=}")
+    hit_die = '2d12 3d6'
+
+    print(die.get_avg(hit_die))
