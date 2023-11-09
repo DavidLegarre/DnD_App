@@ -17,3 +17,19 @@ def get_class_features(Class: str, level: int):
             features_out[feature] = features[feature]
 
     return features_out
+
+
+def clean_upper(string: str):
+    return (
+        string
+        .strip()
+        .upper()
+    )
+
+
+def clean_lower(string: str):
+    return (
+        "_".join(string)
+        .strip()
+        .lower()
+    )

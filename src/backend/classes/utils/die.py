@@ -7,17 +7,16 @@ class die_calculator():
     def __init__(self) -> None:
         pass
 
+    def roll20(self):
+        return self.roll_die(20)
     def calculate_expression(self, expression: str) -> bool | int:
         """
         Function to calculate a die expression, using the same
         syntax as https://dice.clockworkmod.com/ tool
         """
+        # TODO: Refactor expression system
         assert type(expression) is str, "Expression must be a string"
         expression = expression.lower()
-
-        # Check for normal roll
-        if re.match(r'^d\d+$', expression):
-            return self.roll_die(expression[1:])
 
         # Check for roll with advantage
         if re.match(r'^(d\d+) (>) (d\d+)$', expression):
