@@ -7,7 +7,8 @@ class Action:
         self.name = name
         self.description = description
 
-    def perform(self, actor: PcCharacter):
+    @staticmethod
+    def perform(actor: PcCharacter):
         raise NotImplementedError("Perform method on base action class")
 
 
@@ -15,22 +16,25 @@ class AttackAction(Action):
     def __init__(self):
         super().__init__("Attack", "Perform a Melee or Ranged attack")
 
-    def perform(self, actor: PcCharacter):
+    @staticmethod
+    def perform(actor: PcCharacter):
         print("Rolling for attack")
         r20 = Die.roll20()
+        bonus_str = actor.STR
+        total_str = r20 + bonus_str + actor.prof_bonus
+        bonus_dex = actor.DEX
+        total_dex = r20 + bonus_dex + actor.prof_bonus
+
+        if actor.attack_weapon is None:
+            print(f"Attack roll: {total_str} = {r20} + {bonus_dex} + {actor.prof_bonus}")
+            return total_str
         if actor.attack_weapon.melee:
             if actor.attack_weapon.finesse:
-                bonus = actor.DEX
-                total = r20+bonus+actor.prof_bonus
-                print(f"Attack roll: {total} = {r20} + {bonus} + {actor.prof_bonus}")
-                return total
+                print(f"Attack roll: {total_dex} = {r20} + {bonus_dex} + {actor.prof_bonus}")
+                return total_dex
             else:
-                bonus = actor.STR
-                total = r20 + bonus + actor.prof_bonus
-                print(f"Attack roll: {total} = {r20} + {bonus} + {actor.prof_bonus}")
-                return total
+                print(f"Attack roll: {total_str} = {r20} + {bonus_str} + {actor.prof_bonus}")
+                return total_str
         else:
-            bonus = actor.DEX
-            total = r20 + bonus + actor.prof_bonus
-            print(f"Attack roll: {total} = {r20} + {bonus} + {actor.prof_bonus}")
-            return total
+            print(f"Attack roll: {total_dex} = {r20} + {bonus_dex} + {actor.prof_bonus}")
+            return total_dex

@@ -30,42 +30,30 @@ class PcCharacter:
         self.alignment = alignment
         self.xp = xp
         self.MS = movement_speed
+        self.attack_weapon = None
         self.max_hp = 0
         self._prof_bonus = 2
+        self._class = _class
         self.level = level if level else 1
 
         """Stats section"""
-        self.stats = {
-            "STR": {
-                "mod": self._stat_mod(stats["STR"]),
-                "score": stats["STR"]
-            },
-            "DEX": {
-                "mod": self._stat_mod(stats["DEX"]),
-                "score": stats["DEX"]
-            },
-            "CON": {
-                "mod": self._stat_mod(stats["CON"]),
-                "score": stats["CON"]
-            },
-            "INT": {
-                "mod": self._stat_mod(stats["INT"]),
-                "score": stats["INT"]
-            },
-            "WIS": {
-                "mod": self._stat_mod(stats["WIS"]),
-                "score": stats["WIS"]
-            },
-            "CHA": {
-                "mod": self._stat_mod(stats["CHA"]),
-                "score": stats["CHA"]
-            }
-        }
+        self.STR = self._stat_mod(stats["STR"]),
+        self.STR_score = stats["STR"]
+        self.DEX = self._stat_mod(stats["DEX"])
+        self.DEX_score = stats["DEX"]
+        self.CON = self._stat_mod(stats["CON"])
+        self.CON_score = stats["CON"]
+        self.INT = self._stat_mod(stats["INT"])
+        self.INT_score = stats["INT"]
+        self.WIS = self._stat_mod(stats["WIS"])
+        self.WIS_score = stats["WIS"]
+        self.CHA = self._stat_mod(stats["CHA"])
+        self.CHA_score = stats["CHA"]
+
         self.AC = 10 + self.DEX
-        self._skills = SkillManager()
 
         # Get basic class features
-        self.features = get_class_features(_class, 0)
+        self.features = get_class_features(self._class, 0)
         self._hit_die = self.features["hit_die"]
         self._saving_throws = self.features["saving_throws"]
         self._proficiencies = self.features["proficiencies"]
@@ -76,11 +64,11 @@ class PcCharacter:
         self.update_features()
 
         """Turn-based section"""
-        self._actions = [
-            AttackAction()
-        ]
-        self._bonus_actions = []
-        self._reaction = []
+        self._actions = {
+            "attack": AttackAction()
+        }
+        self._bonus_actions = {}
+        self._reaction = {}
 
     def init_features(self):
         self.update_hp()
@@ -91,7 +79,7 @@ class PcCharacter:
 
     def update_hp(self, take_average=True):
         """By default use averages"""
-        if self._level == 1:
+        if self.level == 1:
             self.max_hp = self._hit_die_faces + self.CON
         else:
             if take_average:
@@ -99,17 +87,17 @@ class PcCharacter:
             else:
                 self.max_hp += Die.roll(self._hit_die) + self.CON
 
-    @classmethod
-    def _stat_mod(cls, stat: int = 0):
+    @staticmethod
+    def _stat_mod(stat: int = 0):
         """Returns the modifier of a stat value"""
         return (stat - 10) // 2
 
     def _update_prof_bonus(self):
         """Calculate proficiency bonus at current level"""
-        if self.prof_bonus:
-            self.prof_bonus = math.ceil(1 + 1 / 4 * self._level)
+        if self._prof_bonus:
+            self._prof_bonus = math.ceil(1 + 1 / 4 * self.level)
         else:
-            return math.ceil(1 + 1 / 4 * self._level)
+            return math.ceil(1 + 1 / 4 * self.level)
 
     def roll_saving_throw(self, ability: str):
         ability = clean_upper(upper)
@@ -121,6 +109,13 @@ class PcCharacter:
     def roll_check(self, skill: str):
         skill = clean_lower(skill)
         return self._skills.roll_skill(skill, self.stats)
+
+    def perform_action(self, action: str):
+        action = action.lower()
+        try:
+            self._actions[action].perform(self)
+        except Exception:
+            raise KeyError(f"There was an error performing {action} action")
 
 
 if __name__ == '__main__':
@@ -140,3 +135,4 @@ if __name__ == '__main__':
     print(My_Pc._hit_die)
     print(My_Pc.max_hp)
     print(My_Pc._prof_bonus + My_Pc.STR)
+    My_Pc.perform_action('attack')

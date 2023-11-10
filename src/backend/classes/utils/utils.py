@@ -2,10 +2,13 @@ import json
 from pathlib import Path
 
 
-def get_class_features(Class: str, level: int=0):
-    features_path = Path('C:\mis_archivos\Projects\DnD_App') / 'src' / 'backend' / 'data' / 'classes'
-    features_path = features_path / 'Barbarian' / 'Barbarian.json'
-    features = json.load(open(features_path, 'r'))
+def get_class_features(Class: str, level: int = 0):
+    features_path = Path('C:\Projects\DnD_App\src\\backend\data\classes\Barbarian\Barbarian.json')
+    print(features_path.resolve())
+    if features_path.exists():
+        # Read JSON data from the file
+        with features_path.open() as json_file:
+            features = json.load(json_file)
     return features[f"lvl_{level}"]
 
 
