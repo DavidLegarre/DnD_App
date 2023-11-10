@@ -13,7 +13,7 @@ class Die():
         return cls.roll_die(20)
 
     @classmethod
-    def calculate_expression(cls, expression: str) -> int | tuple[int, bool]:
+    def roll(cls, expression: str) -> int | tuple[int, bool]:
         """
         Function to calculate a die expression, using the same
         syntax as https://dice.clockworkmod.com/ tool

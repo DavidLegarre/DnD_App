@@ -61,12 +61,14 @@ class PcCharacter:
                 "score": stats["CHA"]
             }
         }
+        self.AC = 10 + self.DEX
         self._skills = SkillManager()
 
         # Get basic class features
         self.features = get_class_features(_class, 0)
         self._hit_die = self.features["hit_die"]
         self._saving_throws = self.features["saving_throws"]
+        self._proficiencies = self.features["proficiencies"]
         self._hit_die_faces = Die.get_faces(self._hit_die)
         self.init_features()
 
@@ -74,18 +76,20 @@ class PcCharacter:
         self.update_features()
 
         """Turn-based section"""
-        self._actions = []
+        self._actions = [
+            AttackAction()
+        ]
         self._bonus_actions = []
         self._reaction = []
 
     def init_features(self):
-        self.calculate_hp()
+        self.update_hp()
         self._update_prof_bonus()
 
     def update_features(self):
         self.features = get_class_features(self._class, self.level)
 
-    def calculate_hp(self, take_average=True):
+    def update_hp(self, take_average=True):
         """By default use averages"""
         if self._level == 1:
             self.max_hp = self._hit_die_faces + self.CON
@@ -93,8 +97,7 @@ class PcCharacter:
             if take_average:
                 self.max_hp += (self._hit_die_faces // 2 + 1) + self.CON
             else:
-                health_roll = Die.roll20()
-                self.max_hp += health_roll
+                self.max_hp += Die.roll(self._hit_die) + self.CON
 
     @classmethod
     def _stat_mod(cls, stat: int = 0):

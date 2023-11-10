@@ -2,7 +2,6 @@
     "lvl_0": {
     "name": "Barbarian",
     "hit_die": "1d12",
-    "hp_lvl1": "12 + CON",
     "proficiencies": {
         "Armor": ["light armor", "medium armor", "shield"],
         "Weapons": ["simple weapons", "martial weapons"],
