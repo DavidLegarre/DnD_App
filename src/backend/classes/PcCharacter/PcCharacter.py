@@ -1,6 +1,6 @@
 import math
 
-from src.backend.classes.utils.die import die_calculator
+from src.backend.classes.utils.die import Die
 from src.backend.classes.utils.utils import get_class_features, clean_lower, clean_upper
 
 
@@ -29,7 +29,6 @@ class PcCharacter:
         self.background = background
         self.alignment = alignment
         self.xp = xp
-        self.die = die_calculator()  # Die utility
         self.MS = movement_speed
         self.max_hp = 0
         self._prof_bonus = 2
@@ -68,7 +67,7 @@ class PcCharacter:
         self.features = get_class_features(_class, 0)
         self._hit_die = self.features["hit_die"]
         self._saving_throws = self.features["saving_throws"]
-        self._hit_die_faces = self.die.get_faces(self._hit_die)
+        self._hit_die_faces = Die.get_faces(self._hit_die)
         self.init_features()
 
         # After initializing features
@@ -93,6 +92,9 @@ class PcCharacter:
         else:
             if take_average:
                 self.max_hp += (self._hit_die_faces // 2 + 1) + self.CON
+            else:
+                health_roll = Die.roll20()
+                self.max_hp += health_roll
 
     @classmethod
     def _stat_mod(cls, stat: int = 0):
@@ -108,7 +110,7 @@ class PcCharacter:
 
     def roll_saving_throw(self, ability: str):
         ability = clean_upper(upper)
-        roll = self.die.roll20()
+        roll = Die.roll20()
         if ability in self._saving_throws:
             roll += self._prof_bonus
         return roll
@@ -134,4 +136,4 @@ if __name__ == '__main__':
 
     print(My_Pc._hit_die)
     print(My_Pc.max_hp)
-    print(My_Pc._prof_bonus() + My_Pc.STR)
+    print(My_Pc._prof_bonus + My_Pc.STR)

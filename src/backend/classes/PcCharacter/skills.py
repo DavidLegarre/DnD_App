@@ -1,4 +1,4 @@
-from src.backend.classes.utils.die import die_calculator
+from src.backend.classes.utils.die import Die
 
 
 class SkillManager():
@@ -14,7 +14,7 @@ class SkillManager():
             "WIS": ["animal_handling", "insight", "medicine", "perception", "survival"],
             "CHA": ["deception", "intimidation", "performance", "persuasion"]
         }
-        self.die = die_calculator()
+        self.die = Die()
         self.proficiencies = {}
         for ability, skill in self.skills.items():
             self.proficiencies[skill] = False

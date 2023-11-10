@@ -19,6 +19,22 @@ def get_class_features(Class: str, level: int):
     return features_out
 
 
+def seconds_to_hms(seconds):
+    """
+    Convert seconds to hours, minutes, and seconds.
+
+    Args:
+    - seconds (float): Time in seconds.
+
+    Returns:
+    - str: Time in the format "h:m:s".
+    """
+    hours, remainder = divmod(seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+
+    return "{:02}:{:02}:{:02}".format(int(hours), int(minutes), int(seconds))
+
+
 def clean_upper(string: str):
     return (
         string
