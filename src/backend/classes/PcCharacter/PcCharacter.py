@@ -2,8 +2,13 @@ import math
 
 from src.backend.classes.PcCharacter.actions.Action import AttackAction
 from src.backend.classes.PcCharacter.features.Feature import Feature
+from src.backend.classes.PcCharacter.Barbarian import Barbarian
 from src.backend.classes.utils.die import Die
 from src.backend.classes.utils.utils import get_class_features, clean_lower, clean_upper
+
+available_classes = {
+    'barbarian': Barbarian()
+}
 
 
 class PcCharacter:
@@ -35,7 +40,7 @@ class PcCharacter:
         self.attack_weapon = None
         self.max_hp = 0
         self.prof_bonus = 2
-        self._class = _class
+        self._class = available_classes[_class]
         self.level = level if level else 1
 
         """Stats section"""
@@ -74,7 +79,9 @@ class PcCharacter:
         self.features = []
 
         """Equipment"""
-        self.equipment = []
+        self.equipment = []  # General equipment
+        self.weapon = None  # equipped weapon
+        self.armor = None  # equipped armor
 
     """Update character"""
 
