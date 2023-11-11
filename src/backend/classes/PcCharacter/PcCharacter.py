@@ -2,7 +2,7 @@ import math
 
 from src.backend.classes.utils.die import Die
 from src.backend.classes.utils.utils import get_class_features, clean_lower, clean_upper
-
+import src.backend.classes.PcCharacter.actions.action as action
 
 class PcCharacter:
     """
@@ -32,12 +32,12 @@ class PcCharacter:
         self.MS = movement_speed
         self.attack_weapon = None
         self.max_hp = 0
-        self._prof_bonus = 2
+        self.prof_bonus = 2
         self._class = _class
         self.level = level if level else 1
 
         """Stats section"""
-        self.STR = self._stat_mod(stats["STR"]),
+        self.STR = self._stat_mod(stats["STR"])
         self.STR_score = stats["STR"]
         self.DEX = self._stat_mod(stats["DEX"])
         self.DEX_score = stats["DEX"]
@@ -64,9 +64,7 @@ class PcCharacter:
         self.update_features()
 
         """Turn-based section"""
-        self._actions = {
-            "attack": AttackAction()
-        }
+        self._actions = {'attack': action.AttackAction()}
         self._bonus_actions = {}
         self._reaction = {}
 
@@ -94,16 +92,16 @@ class PcCharacter:
 
     def _update_prof_bonus(self):
         """Calculate proficiency bonus at current level"""
-        if self._prof_bonus:
-            self._prof_bonus = math.ceil(1 + 1 / 4 * self.level)
+        if self.prof_bonus:
+            self.prof_bonus = math.ceil(1 + 1 / 4 * self.level)
         else:
             return math.ceil(1 + 1 / 4 * self.level)
 
     def roll_saving_throw(self, ability: str):
-        ability = clean_upper(upper)
+        ability = clean_upper(ability)
         roll = Die.roll20()
         if ability in self._saving_throws:
-            roll += self._prof_bonus
+            roll += self.prof_bonus
         return roll
 
     def roll_check(self, skill: str):
@@ -112,10 +110,11 @@ class PcCharacter:
 
     def perform_action(self, action: str):
         action = action.lower()
-        try:
-            self._actions[action].perform(self)
-        except Exception:
-            raise KeyError(f"There was an error performing {action} action")
+        action = self._actions.get(action)
+        if action:
+            action.perform(self)
+        else:
+            raise KeyError(f"Unknown action {action}")
 
 
 if __name__ == '__main__':
@@ -134,5 +133,5 @@ if __name__ == '__main__':
 
     print(My_Pc._hit_die)
     print(My_Pc.max_hp)
-    print(My_Pc._prof_bonus + My_Pc.STR)
+    print(My_Pc.prof_bonus + My_Pc.STR)
     My_Pc.perform_action('attack')

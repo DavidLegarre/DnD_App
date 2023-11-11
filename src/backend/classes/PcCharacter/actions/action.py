@@ -3,10 +3,9 @@ from src.backend.classes.utils.die import Die
 
 
 class Action:
-    def __init__(self, name, description):
+    def __init__(self, name: str, description: str):
         self.name = name
         self.description = description
-
     @staticmethod
     def perform(actor: PcCharacter):
         raise NotImplementedError("Perform method on base action class")
@@ -17,7 +16,7 @@ class AttackAction(Action):
         super().__init__("Attack", "Perform a Melee or Ranged attack")
 
     @staticmethod
-    def perform(actor: PcCharacter):
+    def perform(actor):
         print("Rolling for attack")
         r20 = Die.roll20()
         bonus_str = actor.STR
