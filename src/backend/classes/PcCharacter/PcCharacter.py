@@ -1,8 +1,10 @@
 import math
 
+from src.backend.classes.PcCharacter.actions.Action import AttackAction
+from src.backend.classes.PcCharacter.features.Feature import Feature
 from src.backend.classes.utils.die import Die
 from src.backend.classes.utils.utils import get_class_features, clean_lower, clean_upper
-import src.backend.classes.PcCharacter.actions.action as action
+
 
 class PcCharacter:
     """
@@ -50,7 +52,7 @@ class PcCharacter:
         self.CHA = self._stat_mod(stats["CHA"])
         self.CHA_score = stats["CHA"]
 
-        self.AC = 10 + self.DEX
+        self.ac = 10 + self.DEX
 
         # Get basic class features
         self.features = get_class_features(self._class, 0)
@@ -64,9 +66,17 @@ class PcCharacter:
         self.update_features()
 
         """Turn-based section"""
-        self._actions = {'attack': action.AttackAction()}
+        self._actions = {'attack': AttackAction()}
         self._bonus_actions = {}
         self._reaction = {}
+
+        """Features"""
+        self.features = []
+
+        """Equipment"""
+        self.equipment = []
+
+    """Update character"""
 
     def init_features(self):
         self.update_hp()
@@ -85,17 +95,22 @@ class PcCharacter:
             else:
                 self.max_hp += Die.roll(self._hit_die) + self.CON
 
-    @staticmethod
-    def _stat_mod(stat: int = 0):
-        """Returns the modifier of a stat value"""
-        return (stat - 10) // 2
-
     def _update_prof_bonus(self):
         """Calculate proficiency bonus at current level"""
         if self.prof_bonus:
             self.prof_bonus = math.ceil(1 + 1 / 4 * self.level)
         else:
             return math.ceil(1 + 1 / 4 * self.level)
+
+    def _update_AC(self, new_ac):
+        self.ac = new_ac
+
+    """Utilities"""
+
+    @staticmethod
+    def _stat_mod(stat: int = 0):
+        """Returns the modifier of a stat value"""
+        return (stat - 10) // 2
 
     def roll_saving_throw(self, ability: str):
         ability = clean_upper(ability)
@@ -108,6 +123,8 @@ class PcCharacter:
         skill = clean_lower(skill)
         return self._skills.roll_skill(skill, self.stats)
 
+    """Action methods"""
+
     def perform_action(self, action: str):
         action = action.lower()
         action = self._actions.get(action)
@@ -115,6 +132,13 @@ class PcCharacter:
             action.perform(self)
         else:
             raise KeyError(f"Unknown action {action}")
+
+    """Features methods"""
+
+    def add_feature(self, feature):
+        if isinstance(feature, Feature):
+            self.features.append(feature)
+            feature.apply(self)
 
 
 if __name__ == '__main__':

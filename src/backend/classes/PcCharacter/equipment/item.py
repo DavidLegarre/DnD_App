@@ -13,4 +13,4 @@ class Armor(Equipment):
         self.ac = ac
 
     def equip(self, actor: PcCharacter):
-        actor.AC = self.ac
+        actor.ac = self.ac
