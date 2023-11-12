@@ -36,7 +36,7 @@ class PcCharacter:
         self.background = background
         self.alignment = alignment
         self.xp = xp
-        self.MS = movement_speed
+        self.ms = movement_speed
         self.attack_weapon = None
         self.max_hp = 0
         self.prof_bonus = 2

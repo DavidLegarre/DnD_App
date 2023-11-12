@@ -1,5 +1,9 @@
-class Barbarian:
+from src.backend.classes.PcCharacter.classes import Class
+
+
+class Barbarian(Class):
     def __init__(self):
+        super().__init__()
         self.raging = False
         self.rage_count = 0
         self.raging_limit = 2
