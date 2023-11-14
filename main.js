@@ -1,21 +1,15 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow } = require('electron');
 
-app.whenReady().then(() => {
-  // create a window
-  const myWindow = new BrowserWindow({
+function createWindow() {
+  const win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: true, // Enable Node.js integration in the renderer process
     },
   });
 
-  app.on("window-all-closed", () => {
-    if (process.platform !== "darwin") {
-      app.quit();
-    }
-  });
+  win.loadFile('index.html');
+}
 
-  // load a webpage
-  myWindow.loadFile("index.html");
-});
+app.whenReady().then(createWindow);

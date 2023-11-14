@@ -20,7 +20,7 @@ class PcCharacter:
     according to the experience it gained it will ask the user to level the character up
     """
 
-    def __init__(self, id:str = uuid.uuid4(), name: str = "",
+    def __init__(self, id: str = uuid.uuid4(), name: str = "",
                  _class: str = "",
                  race: str = "",
                  background: str = "",
@@ -209,7 +209,7 @@ if __name__ == '__main__':
         "CHA": 20
     }
     My_Pc = PcCharacter(
-        id = "aa6d8217-60e7-441b-b589-269c27cade62",
+        id="aa6d8217-60e7-441b-b589-269c27cade62",
         name="Lalkish Test", _class="Barbarian",
         race="", background="", alignment="", stats=stats
     )

@@ -1,1 +1,45 @@
-{"id": "aa6d8217-60e7-441b-b589-269c27cade62", "name": "Lalkish Test", "race": "", "background": "", "alignment": "", "xp": "0", "ms": "30", "attack_weapon": "None", "max_hp": "17", "prof_bonus": "2", "_class": "Barbarian", "level": "1", "STR": "5", "STR_score": "20", "DEX": "5", "DEX_score": "20", "CON": "5", "CON_score": "20", "INT": "5", "INT_score": "20", "WIS": "5", "WIS_score": "20", "CHA": "5", "CHA_score": "20", "ac": "15", "features": "[]", "_hit_die": "1d12", "_saving_throws": "['STR', 'CON']", "_proficiencies": {"Armor": "['light armor', 'medium armor', 'shield']", "Weapons": "['simple weapons', 'martial weapons']", "Tools": "[]", "Skills": "['Animal Handling', 'Athletics', 'Intimidation', 'Nature', 'Perception', 'Survival']"}, "_hit_die_faces": "12", "_actions": {"attack": "Attack: Perform a Melee or Ranged attack"}, "_bonus_actions": {}, "_reaction": {}, "equipment": "[]", "weapon": "None", "armor": "None"}
+{
+    "id": "aa6d8217-60e7-441b-b589-269c27cade62",
+    "name": "Lalkish Test",
+    "race": "",
+    "background": "",
+    "alignment": "",
+    "xp": "0",
+    "ms": "30",
+    "attack_weapon": "None",
+    "max_hp": "17",
+    "prof_bonus": "2",
+    "_class": "Barbarian",
+    "level": "1",
+    "STR": "5",
+    "STR_score": "20",
+    "DEX": "5",
+    "DEX_score": "20",
+    "CON": "5",
+    "CON_score": "20",
+    "INT": "5",
+    "INT_score": "20",
+    "WIS": "5",
+    "WIS_score": "20",
+    "CHA": "5",
+    "CHA_score": "20",
+    "ac": "15",
+    "features": "[]",
+    "_hit_die": "1d12",
+    "_saving_throws": "['STR', 'CON']",
+    "_proficiencies": {
+        "Armor": "['light armor', 'medium armor', 'shield']",
+        "Weapons": "['simple weapons', 'martial weapons']",
+        "Tools": "[]",
+        "Skills": "['Animal Handling', 'Athletics', 'Intimidation', 'Nature', 'Perception', 'Survival']"
+    },
+    "_hit_die_faces": "12",
+    "_actions": {
+        "attack": "Attack: Perform a Melee or Ranged attack"
+    },
+    "_bonus_actions": {},
+    "_reaction": {},
+    "equipment": "[]",
+    "weapon": "None",
+    "armor": "None"
+}

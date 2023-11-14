@@ -25,6 +25,7 @@ def get_character(uuid):
         return jsonify({'error': 'character not found'}), 404
 
     chr_path = characters_path / (uuid + '.json')
-    with open(chr_path, "w") as chr_json:
+    with open(chr_path, "r") as chr_json:
         chr_data = json.load(chr_json)
+
     return jsonify(chr_data)
