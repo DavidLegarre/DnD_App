@@ -1,13 +1,16 @@
+import json
 import math
+import uuid
+from pathlib import Path
 
+from src.backend.classes.PcCharacter.Barbarian import Barbarian
 from src.backend.classes.PcCharacter.actions.Action import AttackAction
 from src.backend.classes.PcCharacter.features.Feature import Feature
-from src.backend.classes.PcCharacter.Barbarian import Barbarian
 from src.backend.classes.utils.die import Die
 from src.backend.classes.utils.utils import get_class_features, clean_lower, clean_upper
 
 available_classes = {
-    'barbarian': Barbarian()
+    'Barbarian': Barbarian()
 }
 
 
@@ -17,7 +20,7 @@ class PcCharacter:
     according to the experience it gained it will ask the user to level the character up
     """
 
-    def __init__(self, name: str = "",
+    def __init__(self, id:str = uuid.uuid4(), name: str = "",
                  _class: str = "",
                  race: str = "",
                  background: str = "",
@@ -31,6 +34,7 @@ class PcCharacter:
         """
         Initialize the character, creates the character at level 1 as stated in the PHB rules
         """
+        self.id = str(id)
         self.name = name
         self.race = race
         self.background = background
@@ -147,6 +151,53 @@ class PcCharacter:
             self.features.append(feature)
             feature.apply(self)
 
+    """Turn methods"""
+
+    def get_actions(self):
+        output = {}
+        for i, action in enumerate(self._actions):
+            print(f"{i}: {action}")
+        while True:
+            try:
+                player_action = int(input("Enter your selection: "))
+                selected_action = list(self._actions.keys())[player_action]
+                break
+            except (ValueError, IndexError):
+                print("Invalid input. Please enter a valid number")
+        self._actions[selected_action].perform(self)
+
+    def turn(self):
+        self.get_actions()
+
+    def convert_to_dict(self, obj):
+        if isinstance(obj, dict):
+            return {key: self.convert_to_dict(value) for key, value in obj.items()}
+        elif isinstance(obj, (list, tuple)):
+            return [self.convert_to_dict(item) for item in obj]
+        else:
+            return obj
+
+    def jsonify(self, path: Path):
+        path = path / (self.id + ".json")
+        result = {}
+        for key, value in vars(self).items():
+            if isinstance(value, dict):
+                for _key, _value in value.items():
+                    if isinstance(value, list) or isinstance(value, tuple):
+                        continue
+                    value[_key] = str(_value)
+                result[key] = value
+                continue
+            result[key] = str(value)
+        with open(path, "w") as f:
+            json.dump(result, f)
+
+        return result
+
+    def save_character(self, path: Path):
+        with open(path, 'a') as f:
+            f.write(self.id + '\n')
+
 
 if __name__ == '__main__':
     stats = {
@@ -158,6 +209,7 @@ if __name__ == '__main__':
         "CHA": 20
     }
     My_Pc = PcCharacter(
+        id = "aa6d8217-60e7-441b-b589-269c27cade62",
         name="Lalkish Test", _class="Barbarian",
         race="", background="", alignment="", stats=stats
     )
@@ -166,3 +218,8 @@ if __name__ == '__main__':
     print(My_Pc.max_hp)
     print(My_Pc.prof_bonus + My_Pc.STR)
     My_Pc.perform_action('attack')
+    # My_Pc.turn()
+    json_path = Path.cwd().parent.parent / 'data' / 'characters'
+    pc_json = My_Pc.jsonify(json_path)
+    json_path = json_path / 'database.txt'
+    # My_Pc.save_character(json_path)

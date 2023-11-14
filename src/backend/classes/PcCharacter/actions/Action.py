@@ -7,6 +7,9 @@ class Action:
         self.name = name
         self.description = description
 
+    def __str__(self):
+        return self.name
+
     @staticmethod
     def perform(actor: PcCharacter):
         raise NotImplementedError("Perform method on base action class")
@@ -15,6 +18,9 @@ class Action:
 class AttackAction(Action):
     def __init__(self):
         super().__init__("Attack", "Perform a Melee or Ranged attack")
+
+    def __str__(self):
+        return f"{self.name}: {self.description}"
 
     @staticmethod
     def perform(actor: PcCharacter):

@@ -29,3 +29,6 @@ class Barbarian(Class):
     def attack(self):
         if self.raging:
             print("Applying rage damage to the attack")
+
+    def __str__(self):
+        return "Barbarian"
