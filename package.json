@@ -12,10 +12,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "concurrently \"npm run start_api\" \"react-scripts start\"",
+    "build": "concurrently \"npm run start_api\" \"react-scripts build\"",
+    "test": "concurrently \"npm run start_api\" \"react-scripts test\"",
+    "eject": "react-scripts eject",
+    "start_api": "cd src/backend  && set FLASK_APP=api.py && flask run"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +35,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }

@@ -2,10 +2,12 @@ import json
 from pathlib import Path
 
 from flask import Flask, jsonify
+from flask_cors import CORS
+from backend.api_utils import is_character_created
 
-from src.backend.api_utils import is_character_created
 
 app = Flask("DnD_App")
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 data_path = Path.cwd() / 'data'
 characters_path = data_path / 'characters'
 database_path = characters_path / 'database.txt'
@@ -27,5 +29,8 @@ def get_character(uuid):
     chr_path = characters_path / (uuid + '.json')
     with open(chr_path, "r") as chr_json:
         chr_data = json.load(chr_json)
+    
+    response = jsonify(chr_data)
+    response.headers.add('Access-Control-Allow-Origin', '*')
 
-    return jsonify(chr_data)
+    return response
