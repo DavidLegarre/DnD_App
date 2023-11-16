@@ -1,0 +1,122 @@
+{
+    "lvl_0": {
+    "name": "Barbarian",
+    "hit_die": "1d12",
+    "proficiencies": {
+        "Armor": ["light armor", "medium armor", "shield"],
+        "Weapons": ["simple weapons", "martial weapons"],
+        "Tools": [],
+        "Skills": [
+            "Animal Handling", "Athletics", "Intimidation",
+            "Nature", "Perception", "Survival"
+        ]
+    },
+    "saving_throws": ["STR", "CON"],
+    "starting_equipment": [
+        "greataxe or martial melee weapons",
+        "2 handaxes or any simple weapon",
+        "Explorer's pack",
+        "4 javelin"
+    ] 
+    },
+    "lvl_1": {
+        "Features": ["rage", "Unarmored defense"],
+        "Rages": "2",
+        "Rage dmg": "+2"
+    },
+    "lvl_2": {
+        "Features": ["Danger sense", "Reckless attack"],
+        "Rages": "2",
+        "Rage dmg": "+2"
+    },
+    "lvl_3": {
+        "Features": ["Primal path", "Primal Knowledge"],
+        "Rages": "3",
+        "Rage dmg": "+2"
+    },
+    "lvl_4": {
+        "Features": ["ASI"],
+        "Rages": "3",
+        "Rage dmg": "+2"
+    },
+    "lvl_5": {
+        "Features": ["Extra attack", "Fast movement"],
+        "Rages": "3",
+        "Rage dmg": "+2"
+    },
+    "lvl_6": {
+        "Features": ["Subclass"],
+        "Rages": "4",
+        "Rage dmg": "+2"
+    },
+    "lvl_7": {
+        "Features": ["Feral instinct", "Instinctive Pounce"],
+        "Rages": "4",
+        "Rage dmg": "+2"
+    },
+    "lvl_8": {
+        "Features": ["ASI"],
+        "Rages": "4",
+        "Rage dmg": "+2"
+    },
+    "lvl_9": {
+        "Features": ["Brutal critical"],
+        "Rages": "4",
+        "Rage dmg": "+3"
+    },
+    "lvl_10": {
+        "Features": ["Subclass"],
+        "Rages": "4",
+        "Rage dmg": "+3"
+    },
+    "lvl_11": {
+        "Features": ["Relentless rage"],
+        "Rages": "4",
+        "Rage dmg": "+3"
+    },
+    "lvl_12": {
+        "Features": ["ASI"],
+        "Rages": "5",
+        "Rage dmg": "+3"
+    },
+    "lvl_13": {
+        "Features": ["Brutal critical"],
+        "Rages": "5",
+        "Rage dmg": "+3"
+    },
+    "lvl_14": {
+        "Features": ["Subclass"],
+        "Rages": "5",
+        "Rage dmg": "+3"
+    },
+    "lvl_15": {
+        "Features": ["Persistent rage"],
+        "Rages": "5",
+        "Rage dmg": "+3"
+    },
+    "lvl_16": {
+        "Features": ["ASI"],
+        "Rages": "5",
+        "Rage dmg": "+4"
+    },
+    "lvl_17": {
+        "Features": ["Brutal critical"],
+        "Rages": "6",
+        "Rage dmg": "+4"
+    },
+    "lvl_18": {
+        "Features": ["Indomitable might"],
+        "Rages": "6",
+        "Rage dmg": "+4"
+    },
+    "lvl_19": {
+        "Features": ["ASI"],
+        "Rages": "6",
+        "Rage dmg": "+4"
+    },
+    "lvl_20": {
+        "Features": ["Primal Champion"],
+        "Rages": "inf",
+        "Rage dmg": "+4"
+    }
+}

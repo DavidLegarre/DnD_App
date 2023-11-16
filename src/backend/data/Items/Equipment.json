@@ -1,0 +1,39 @@
+{
+  "armor": {
+    "heavy_armor": {
+      "chain_mail": {
+        "AC": 16,
+        "disadvantage": "stealth",
+        "requirements": "STR 13",
+        "miss_requirements": "-10 MS"
+      },
+      "plate_armor": {
+        "AC": 18
+      },
+      "ring_mail": {
+        "AC": 14
+      },
+      "splint_armor": {
+        "AC": 17
+      }
+    },
+    "medium_armor": {
+      "breastplate": {
+        "AC": "14 + DEX2"
+      },
+      "chain_shirt": {
+        "AC": "13 + DEX2"
+      },
+      "half_plate": {
+        "AC": "15 + DEX2",
+        "disadvantage": "stealth"
+      },
+      "hide_armor": {
+        "AC": "12 + DEX2"
+      },
+      "scale_mail": {
+        "AC": "14 + DEX2"
+      }
+    }
+  }
+}
