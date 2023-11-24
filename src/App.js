@@ -9,27 +9,22 @@ function App() {
   const [char, setChar] = useState([]);
   // Fetch Character Data
   useEffect(() => {
-    fetchCharacterData(setChar);
+    fetchCharacterData().then((data) => {
+      setChar(data);
+    }).catch((error) => {
+      console.error("Error fetching data: ", error);
+    });
   }, []);
 
   //console.log(JSON.parse(char._proficiencies));
-  console.log(char._proficiencies)
+  //console.log(char._proficiencies)
   //console.log(char._proficiencies.Armor);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p></p>
-        <div>
-          <ul>
-            <li>Character Name: {char.name}</li>
-            <li>Character Class: {char._class}</li>
-            <li>Character Class: {char._class}</li>
-            <li>Character Armor proficiencies: </li>
-          </ul>
-        </div>
-      </header>
+    <div>
+      {char.map(item => (
+        <p key={item.id}>{item.name}</p>
+      ))}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import time
 from loguru import logger
 
-from src.backend.classes.utils.utils import seconds_to_hms
+from classes.utils.utils import seconds_to_hms
 
 
 def timeIt(func):

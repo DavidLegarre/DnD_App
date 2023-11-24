@@ -1,4 +1,4 @@
-from src.backend.classes.PcCharacter.classes import Class
+from classes.PcCharacter.classes import Class
 
 
 class Barbarian(Class):

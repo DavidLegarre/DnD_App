@@ -3,11 +3,11 @@ import math
 import uuid
 from pathlib import Path
 
-from src.backend.classes.PcCharacter.Barbarian import Barbarian
-from src.backend.classes.PcCharacter.actions.Action import AttackAction
-from src.backend.classes.PcCharacter.features.Feature import Feature
-from src.backend.classes.utils.die import Die
-from src.backend.classes.utils.utils import get_class_features, clean_lower, clean_upper
+from classes.PcCharacter.Barbarian import Barbarian
+from classes.PcCharacter.actions.Action import AttackAction
+from classes.PcCharacter.features.Feature import Feature
+from classes.utils.die import Die
+from classes.utils.utils import get_class_features, clean_lower, clean_upper
 
 available_classes = {
     'Barbarian': Barbarian()
